@@ -15,7 +15,7 @@ $tipo = $_GET["type"] ?? "";
 <head>
   <meta charset="utf-8" />
   <title>CRUD Empleados - EMTELCO</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260214">
 </head>
 <body>
 <div class="container">
