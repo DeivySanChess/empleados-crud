@@ -58,8 +58,8 @@ $tipo = $_GET["type"] ?? "";
             <td><?= htmlspecialchars($e["email"]) ?></td>
             <td><?= htmlspecialchars($e["fecha_ingreso"]) ?></td>
             <td class="actions">
-              <a class="button" href="edit.php?id=<?= (int)$e["id"] ?>">Editar</a>
-              <a class="button" href="delete.php?id=<?= (int)$e["id"] ?>" onclick="return confirm('¿Eliminar este empleado?');">Eliminar</a>
+              <a class="button button-edit" href="edit.php?id=<?= (int)$e["id"] ?>">Editar</a>
+              <a class="button button-delete" href="delete.php?id=<?= (int)$e["id"] ?>" onclick="return confirm('¿Eliminar este empleado?');">Eliminar</a>
             </td>
           </tr>
         <?php endforeach; ?>
