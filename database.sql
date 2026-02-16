@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS empleados (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- (Opcional) Datos de prueba
+-- Datos de prueba
 INSERT INTO empleados (nombre_completo, cargo, email, fecha_ingreso)
 VALUES
-('Ana Pérez', 'Analista', 'ana.perez@example.com', '2026-01-10'),
-('Carlos Gómez', 'Desarrollador', 'carlos.gomez@example.com', '2026-02-01');
+('Ana Pérez', 'Analista', 'ana.perez@gmail.com', '2026-01-10'),
+('Carlos Gómez', 'Desarrollador', 'carlos.gomez@gmail.com', '2026-02-01');
