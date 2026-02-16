@@ -2,11 +2,23 @@
 require_once __DIR__ . "/../config/Database.php";
 require_once __DIR__ . "/../models/Empleado.php";
 
-$db = (new Database())->getConnection();
+// Versión para forzar actualización de assets en el navegador.
+const ASSET_VERSION = "20260216";
+
+// 1) Preparar conexión y modelo.
+try {
+    $db = (new Database())->getConnection();
+} catch (RuntimeException $e) {
+    error_log($e->getMessage());
+    http_response_code(500);
+    die("No se pudo conectar a la base de datos.");
+}
 $empleadoModel = new Empleado($db);
 
+// 2) Traer el listado ordenado (fecha_ingreso DESC).
 $empleados = $empleadoModel->obtenerTodos();
 
+// 3) Mensajes de retroalimentación (query string).
 $mensaje = $_GET["msg"] ?? "";
 $tipo = $_GET["type"] ?? "";
 ?>
@@ -15,7 +27,7 @@ $tipo = $_GET["type"] ?? "";
 <head>
   <meta charset="utf-8" />
   <title>CRUD Empleados - EMTELCO</title>
-  <link rel="stylesheet" href="styles.css?v=20260215">
+  <link rel="stylesheet" href="styles.css?v=<?= ASSET_VERSION ?>">
 </head>
 <body>
 <div class="container">
@@ -37,6 +49,7 @@ $tipo = $_GET["type"] ?? "";
     </div>
   <?php endif; ?>
 
+  <!-- Tabla principal -->
   <table>
     <thead>
       <tr>

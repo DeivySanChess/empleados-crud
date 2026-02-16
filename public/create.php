@@ -2,15 +2,26 @@
 require_once __DIR__ . "/../config/Database.php";
 require_once __DIR__ . "/../models/Empleado.php";
 
-$db = (new Database())->getConnection();
+const ASSET_VERSION = "20260216";
+
+// 1) Preparar modelo.
+try {
+    $db = (new Database())->getConnection();
+} catch (RuntimeException $e) {
+    error_log($e->getMessage());
+    http_response_code(500);
+    die("No se pudo conectar a la base de datos.");
+}
 $empleadoModel = new Empleado($db);
 
+// 2) Estado inicial del formulario.
 $errores = [];
 $nombre = "";
-$cargo = "";
-$email = "";
-$fecha = "";
+$cargo  = "";
+$email  = "";
+$fecha  = "";
 
+// 3) Procesar envío POST.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $_POST["nombre_completo"] ?? "";
     $cargo  = $_POST["cargo"] ?? "";
@@ -34,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
   <meta charset="utf-8" />
   <title>Crear empleado</title>
-  <link rel="stylesheet" href="styles.css?v=20260214">
+  <link rel="stylesheet" href="styles.css?v=<?= ASSET_VERSION ?>">
 </head>
 <body>
 <div class="container">
@@ -56,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
   <?php endif; ?>
 
+  <!-- Formulario de alta -->
   <form method="POST" novalidate>
     <div class="form-row">
       <label>Nombre completo</label>

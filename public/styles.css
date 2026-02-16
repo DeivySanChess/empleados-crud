@@ -1,22 +1,60 @@
+/* Fuente principal */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Paleta de marca */
 :root {
-  --emt-primary: #30287C;
-  --emt-accent:  #21BBEF;
-  --emt-dark:    #1F184F;
-  --emt-light:   #F4F7FF;
-  --emt-border:  #D7DDF0;
-  --emt-danger:  #d64545;
+  --emt-primary:   #30287C;
+  --emt-accent:    #21BBEF;
+  --emt-dark:      #1F184F;
+  --emt-light:     #F4F7FF;
+  --emt-border:    #D7DDF0;
+  --emt-danger:    #d64545;
   --emt-highlight: rgba(33,187,239,0.15);
 }
 
-body { font-family: 'Poppins', 'Segoe UI', sans-serif; margin: 0; background: linear-gradient(135deg, #f7fbff, #eef1ff); color: #1f1f2e; }
-.container { max-width: 950px; margin: 32px auto; background: #fff; padding: 28px; border-radius: 14px; box-shadow: 0 12px 30px rgba(13,24,63,0.12); border: 1px solid var(--emt-border); }
+/* Layout base */
+body {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #f7fbff, #eef1ff);
+  color: #1f1f2e;
+}
+
+.container {
+  max-width: 950px;
+  margin: 32px auto;
+  background: #fff;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(13,24,63,0.12);
+  border: 1px solid var(--emt-border);
+}
+
+/* Cabecera */
 h1 { margin-bottom: 6px; color: var(--emt-primary); letter-spacing: 0.5px; }
 .header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .titles { flex: 1; }
 .logo { max-height: 70px; width: auto; object-fit: contain; }
-a.button, button { padding: 9px 14px; border: none; background: var(--emt-primary); color: #fff; cursor: pointer; text-decoration: none; display: inline-block; border-radius: 10px; font-weight: 600; box-shadow: 0 6px 16px rgba(48,40,124,0.25); transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease; }
-a.button:hover, button:hover { background: var(--emt-accent); box-shadow: 0 8px 18px rgba(33,187,239,0.3); transform: translateY(-1px); }
+
+/* Botones */
+a.button, button {
+  padding: 9px 14px;
+  border: none;
+  background: var(--emt-primary);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(48,40,124,0.25);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease;
+}
+a.button:hover, button:hover {
+  background: var(--emt-accent);
+  box-shadow: 0 8px 18px rgba(33,187,239,0.3);
+  transform: translateY(-1px);
+}
 a.button.button-edit {
   background: var(--emt-highlight);
   color: var(--emt-primary);
@@ -30,17 +68,32 @@ a.button.button-edit:hover {
 }
 a.button.button-delete { background: var(--emt-primary); box-shadow: 0 6px 16px rgba(48,40,124,0.25); }
 a.button.button-delete:hover { background: var(--emt-dark); box-shadow: 0 8px 18px rgba(31,24,79,0.3); }
+
+/* Tabla */
 table { width: 100%; border-collapse: collapse; margin-top: 12px; }
 th, td { border: 1px solid var(--emt-border); padding: 11px 12px; text-align: left; }
 th { background: var(--emt-primary); color: #fff; letter-spacing: 0.3px; }
 tbody tr:nth-child(even) { background: var(--emt-light); }
 .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; background: var(--emt-highlight); color: var(--emt-primary); font-weight: 600; }
+
+/* Alertas */
 .alert { padding: 12px; border: 1px solid var(--emt-border); background: var(--emt-light); margin: 12px 0; border-radius: 10px; }
 .alert.error { border-color: #d9534f; background: #fff1f1; color: #a32121; }
 .alert.success { border-color: #2ab673; background: #ecfff6; color: #13663d; }
+
+/* Formularios */
 .form-row { margin-bottom: 10px; }
 label { display: block; margin-bottom: 6px; }
-input { padding: 10px 11px; width: 100%; box-sizing: border-box; border: 1px solid var(--emt-border); border-radius: 10px; transition: border-color 140ms ease, box-shadow 140ms ease; }
+input {
+  padding: 10px 11px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--emt-border);
+  border-radius: 10px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
 input:focus { outline: none; border-color: var(--emt-accent); box-shadow: 0 0 0 3px rgba(33,187,239,0.15); }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Utilidades */
 .small { font-size: 0.94rem; color: #4b4f70; }
