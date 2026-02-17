@@ -41,16 +41,28 @@ class Database {
     private function ensureSchema(): void {
         try {
             $stmt = $this->conn->query(
-                "SELECT COUNT(*) FROM information_schema.COLUMNS
-                 WHERE TABLE_SCHEMA = DATABASE()
-                   AND TABLE_NAME = 'empleados'
-                   AND COLUMN_NAME = 'contacto'"
+                "SELECT COLUMN_NAME, IS_NULLABLE
+                   FROM information_schema.COLUMNS
+                  WHERE TABLE_SCHEMA = DATABASE()
+                    AND TABLE_NAME = 'empleados'
+                    AND LOWER(COLUMN_NAME) = 'contacto'
+                  LIMIT 1"
             );
-            $hasColumn = (int)$stmt->fetchColumn() > 0;
-            if (!$hasColumn) {
+            $col = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$col) {
+                // No existe la columna, se crea en minúsculas y nullable.
                 $this->conn->exec(
                     "ALTER TABLE empleados ADD COLUMN contacto VARCHAR(20) NULL AFTER nombre_completo"
                 );
+            } else {
+                // Existe pero podría ser NOT NULL; si es así, la hacemos nullable.
+                if (strcasecmp($col['IS_NULLABLE'] ?? '', 'YES') !== 0) {
+                    $colName = $col['COLUMN_NAME']; // preserva el nombre real (Contacto/contacto)
+                    $this->conn->exec(
+                        "ALTER TABLE empleados MODIFY COLUMN `{$colName}` VARCHAR(20) NULL"
+                    );
+                }
             }
         } catch (PDOException $e) {
             // No interrumpir el flujo de la app por un ajuste de esquema.
