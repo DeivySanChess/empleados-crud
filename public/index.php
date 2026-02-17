@@ -54,6 +54,7 @@ $tipo = $_GET["type"] ?? "";
     <thead>
       <tr>
         <th>Nombre completo</th>
+        <th>Contacto</th>
         <th>Cargo</th>
         <th>Email</th>
         <th>Fecha ingreso</th>
@@ -67,6 +68,7 @@ $tipo = $_GET["type"] ?? "";
         <?php foreach($empleados as $e): ?>
           <tr>
             <td><?= htmlspecialchars($e["nombre_completo"]) ?></td>
+            <td><?= htmlspecialchars($e["contacto"] ?? "") ?></td>
             <td><span class="badge"><?= htmlspecialchars($e["cargo"]) ?></span></td>
             <td><?= htmlspecialchars($e["email"]) ?></td>
             <td><?= htmlspecialchars($e["fecha_ingreso"]) ?></td>

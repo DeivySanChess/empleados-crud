@@ -4,6 +4,7 @@ USE emtelco_crud;
 CREATE TABLE IF NOT EXISTS empleados (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_completo VARCHAR(100) NOT NULL,
+    contacto VARCHAR(20) NULL,
     cargo VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     fecha_ingreso DATE NOT NULL,

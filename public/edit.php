@@ -31,6 +31,7 @@ if (!$empleado) {
 // 4) Estado inicial del formulario.
 $errores = [];
 $nombre = $empleado["nombre_completo"];
+$contacto = $empleado["contacto"] ?? "";
 $cargo  = $empleado["cargo"];
 $email  = $empleado["email"];
 $fecha  = $empleado["fecha_ingreso"];
@@ -38,14 +39,15 @@ $fecha  = $empleado["fecha_ingreso"];
 // 5) Procesar envío POST.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $_POST["nombre_completo"] ?? "";
+    $contacto = $_POST["contacto"] ?? "";
     $cargo  = $_POST["cargo"] ?? "";
     $email  = $_POST["email"] ?? "";
     $fecha  = $_POST["fecha_ingreso"] ?? "";
 
-    $errores = $empleadoModel->validarCampos($nombre, $cargo, $email, $fecha);
+    $errores = $empleadoModel->validarCampos($nombre, $cargo, $email, $contacto, $fecha);
 
     if (count($errores) === 0) {
-        $ok = $empleadoModel->actualizar($id, trim($nombre), trim($cargo), trim($email), trim($fecha));
+        $ok = $empleadoModel->actualizar($id, trim($nombre), trim($cargo), trim($email), trim($contacto), trim($fecha));
         if ($ok) {
             header("Location: index.php?type=ok&msg=" . urlencode("Empleado actualizado correctamente."));
             exit;
@@ -86,6 +88,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="form-row">
       <label>Nombre completo</label>
       <input type="text" name="nombre_completo" value="<?= htmlspecialchars($nombre) ?>" required>
+    </div>
+
+    <div class="form-row">
+      <label>Contacto</label>
+      <input type="text" name="contacto" value="<?= htmlspecialchars($contacto) ?>" maxlength="20">
     </div>
 
     <div class="form-row">
