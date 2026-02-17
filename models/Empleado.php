@@ -66,7 +66,17 @@ class Empleado {
 
     /** Obtiene todos los empleados ordenados por fecha de ingreso descendente. */
     public function obtenerTodos(): array {
-        $sql = "SELECT * FROM {$this->table} ORDER BY fecha_ingreso DESC";
+        // Alias explícitos para fijar claves en minúscula (evita problemas de
+        // capitalización en columnas existentes como `Contacto`).
+        $sql = "SELECT id,
+                       nombre_completo,
+                       contacto AS contacto,
+                       cargo,
+                       email,
+                       fecha_ingreso,
+                       created_at
+                FROM {$this->table}
+                ORDER BY fecha_ingreso DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -74,7 +84,16 @@ class Empleado {
 
     /** Devuelve un empleado por ID o null si no existe. */
     public function obtenerPorId(int $id): ?array {
-        $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+        $sql = "SELECT id,
+                       nombre_completo,
+                       contacto AS contacto,
+                       cargo,
+                       email,
+                       fecha_ingreso,
+                       created_at
+                FROM {$this->table}
+                WHERE id = :id
+                LIMIT 1";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([":id" => $id]);
         $row = $stmt->fetch();
